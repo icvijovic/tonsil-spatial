@@ -1,0 +1,78 @@
+cluster:
+  mkdir -p logs/{rule} &&
+  sbatch
+    --job-name={rule}
+    --time={resources.time}
+    --ntasks=1    
+    --partition={resources.partition}
+    --cpus-per-task={resources.threads}
+    --mem={resources.mem_mb}
+    --output=logs/{rule}/{rule}-%j.out
+    --error=logs/{rule}/{rule}-%j.err
+    --gpus={resources.gpus}
+
+default-resources:
+  - partition=normal
+  - mem_mb=4000
+  - gpus=0
+  - time="04:00:00"
+  - threads=4
+  - disk_mb=500000
+  - tmpdir="/scratch/groups/dsfisher/icvijovic"
+restart-times: 0
+rerun-triggers: mtime
+max-jobs-per-second: 10
+max-status-checks-per-second: 1
+local-cores: 1
+latency-wait: 60
+jobs: 500
+keep-going: True
+rerun-incomplete: True
+printshellcmds: True
+scheduler: greedy
+use-conda: True
+use-singularity: True
+snakefile: Snakefile.smk
+set-resources:
+    - run_cellbender:mem_mb=16000
+    - run_cellbender:time="4:00:00"
+    - run_cellbender:partition=gpu
+    - run_cellbender:gpus=1
+    - cellranger_count:mem_mb=64000
+    - cellranger_count:partition=owners
+    - cellranger_count:time="24:00:00"
+    - cellranger_count:threads=20
+    - cellranger_count:disk_mb=1000000
+    - aggregate_h5ads:mem_mb=210000
+    - aggregate_h5ads:time="01:00:00"
+    - aggregate_annotated:mem_mb=120000
+    - annotate_cell_cycle_b_cell:mem_mb=64000
+    - annotate_cell_cycle_b_cell:time="2:00:00"
+    - cellranger_vdj:mem_mb=120000
+    - igblast:mem_mb=65000
+    - igblast:time="24:00:00"
+    - igblast:threads=20
+    - scvi_bcells:gpus=1
+    - scvi_bells:partition="gpu,owners"
+    - scvi_bcells:mem_mb=64000
+    - scvi_bcells:time="2:00:00"
+    - scvi_bcells_ldvae:gpus=1
+    - scvi_bells_ldvae:partition="gpu,owners"
+    - scvi_bcells_ldvae:mem_mb=64000
+    - scvi_bcells_ldvae:time="2:00:00"
+    - scvi_bcells_cc:gpus=1
+    - scvi_bells_cc:partition="gpu,owners"
+    - scvi_bcells_cc:mem_mb=64000
+    - scvi_bcells_cc:time="2:00:00"
+    - subset_bcells:time="1:00:00"
+    - subset_bcells:mem_mb=64000
+    - remove_nonb:mem_mb=64000
+    - remove_nonb:time="0:30:00"
+    - scvi_all_cells:gpus=1
+    - scvi_all_cells:mem_mb=64000
+    - scvi_all_cells:time="8:00:00"
+    - scvi_all_cells:partition="gpu,owners"
+    - merge_vdj:mem_mb=32000
+    - run_celltypist_by_tissue:mem_mb=128000
+    - run_celltypist_by_tissue:time="1:00:00"
+    - add_latent_reps:mem_mb=64000

@@ -1,0 +1,11 @@
+name: plot_minimal
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - numpy=1.23.5
+  - scipy>=1.4.1
+  - pandas>=1.5.2
+  - python-levenshtein
+  - matplotlib=3.6.2
+  - seaborn=0.12.1

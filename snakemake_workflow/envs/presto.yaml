@@ -1,0 +1,7 @@
+name: presto
+channels:
+  - bioconda
+dependencies:
+  - presto
+  - muscle
+  - fasttree >= 2.1.10

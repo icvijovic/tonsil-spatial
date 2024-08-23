@@ -1,0 +1,17 @@
+name: igblast
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - bzip2=1.0.8=h7b6447c_0
+  - icu=58.2=he6710b0_3
+  - igblast=1.15.0=h18cd00f_0
+  - libgcc-ng=9.1.0=hdf63c60_0
+  - libstdcxx-ng=9.1.0=hdf63c60_0
+  - libxml2=2.9.10=hb55368b_3
+  - ncbi-vdb=2.11.0=he1b5a44_0
+  - perl=5.26.2=h14c3975_0
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7b6447c_3
+prefix: /home/users/mswift2/miniconda3/envs/igblast
