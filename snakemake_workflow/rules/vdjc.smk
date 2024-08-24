@@ -56,7 +56,7 @@ rule filter_and_annotate:
     conda:
         "../envs/pacbio.yaml"
     log:
-        "{base}/logs/{sample_uid_vdj}_filter_vdj.log",
+        "{base}/logs/filter_vdj.log",
     resources:
         mem_mb="131000",
     params:
@@ -65,7 +65,7 @@ rule filter_and_annotate:
         "python {params.scripts}/filter_igblast_and_annotate.py "
         "{input.igblast} "
         "-read_info {input.read_info} "
-        "-outdir {wildcards.base}/per_sample/vdj_preprocess/{wildcards.sample_uid_vdj}  "
+        "-outdir {wildcards.base}/vdj  "
         "--verbose "
         "> {log} "
         "2> {log}"

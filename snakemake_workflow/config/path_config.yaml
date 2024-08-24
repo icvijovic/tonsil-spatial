@@ -2,7 +2,7 @@
 # General
 # output directory for processed data
 base: 
-  "/home/groups/dsfisher/icvijovic/tonsil-spatial/data/"
+  "/home/groups/dsfisher/icvijovic/tonsil-spatial/data"
 workflow_dir: "/home/groups/dsfisher/icvijovic/tonsil-spatial/snakemake_workflow" 
 
   
