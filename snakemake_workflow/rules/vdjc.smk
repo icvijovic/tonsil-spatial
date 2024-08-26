@@ -70,3 +70,32 @@ rule filter_and_annotate:
         "> {log} "
         "2> {log}"
 
+
+
+rule call_germlines:
+    input:
+        rules.filter_and_annotate.output,
+    output:
+        germlines="{base}/grmlin/combined_v_germlines.tsv",
+        preprocessed="{base}/grmlin/vdjs_combined_preprocessed.tsv.gz",
+    log:
+        "{base}/logs/grmlin.log",
+    conda:
+        "germline_inference"#../envs/grmlin.yaml"
+    params:
+        organism="human", 
+        grmlin=config["grmlin"],
+        IGDBDIR=config["IGDBDIR"],
+    resources:
+        mem_mb="131000",
+        time="24:00:00",
+    shell:
+        "{params.grmlin}/grmlin "
+        "{input} "
+        "-annotate {params.IGDBDIR}/database/imgt_{params.organism}_ig_v "
+        "-outdir {wildcards.base}/grmlin "
+        "--verbose "
+        "-max_sequences 500000 "
+        "> {log}"
+
+

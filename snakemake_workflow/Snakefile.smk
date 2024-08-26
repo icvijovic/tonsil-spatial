@@ -9,7 +9,7 @@ base = config["base"]
 
 rule all:
     input:
-        expand("{base}/vdj/igblast_filtered_annotated.tsv.gz", base=base)
+        expand("{base}/grmlin/vdjs_combined_preprocessed.tsv.gz", base=base)
     params:
         name="all",
         partition="owners",
