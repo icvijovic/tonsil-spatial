@@ -76,8 +76,8 @@ rule call_germlines:
     input:
         rules.filter_and_annotate.output,
     output:
-        germlines="{base}/grmlin/combined_v_germlines.tsv",
-        preprocessed="{base}/grmlin/vdjs_combined_preprocessed.tsv.gz",
+        germlines="{base}/grmlin/igblast_filtered_annotated_v_germlines.tsv",
+        preprocessed="{base}/grmlin/igblast_filtered_annotated_preprocessed.tsv.gz",
     log:
         "{base}/logs/grmlin.log",
     conda:
