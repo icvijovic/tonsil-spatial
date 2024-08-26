@@ -4,7 +4,7 @@ rule reads_to_fasta:
     output:
         "{base}/vdj/all_consensus_sequences.fasta",
     conda:
-        "../envs/pacbio.yaml",
+        "pacbio",#"../envs/pacbio.yaml",
     log:
         "{base}/logs/reads_to_fasta.log",
     resources:
@@ -20,7 +20,7 @@ rule igblast:
     output:
         "{base}/vdj/igblast.tsv",
     conda:
-        "../envs/pacbio.yaml",
+        "pacbio",#"../envs/pacbio.yaml",
     resources:
         threads=16,
     params:
@@ -54,7 +54,7 @@ rule filter_and_annotate:
     output:
         "{base}/vdj/igblast_filtered_annotated.tsv.gz",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio",#"../envs/pacbio.yaml"
     log:
         "{base}/logs/filter_vdj.log",
     resources:

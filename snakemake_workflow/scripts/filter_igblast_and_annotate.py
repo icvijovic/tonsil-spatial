@@ -135,10 +135,8 @@ if __name__ == '__main__':
     failed_vdj_align = df[~good_vj_alignment]
     failed_vdj_align = failed_vdj_align.fillna(value={"sequence":""})
     
-    failed_vdj_align_fasta_records = ">" + failed_vdj_align.sequence_id \
-                                + "\n" + failed_vdj_align.sequence + "\n"
-   
-    print(len(failed_vdj_align_fasta_records.values), "records failed") 
+    failed_vdj_align_fasta_records = ">" + failed_vdj_align.sequence_id.astype(str) \
+                                + "\n" + failed_vdj_align.sequence.astype(str) + "\n"
     for it, record in enumerate(failed_vdj_align_fasta_records.values):
         #sys.stderr.write(str(record))
         try:
@@ -164,7 +162,7 @@ if __name__ == '__main__':
                 print("   all sequences appear productive.")
 
         unproductive_sequences = df[~productive]
-        unproductive_sequences_fasta_records = ">" + unproductive_sequences.sequence_id \
+        unproductive_sequences_fasta_records = ">" + unproductive_sequences.sequence_id.astype(str) \
                                     + "\n" + unproductive_sequences.sequence + "\n"
 
         for record in unproductive_sequences_fasta_records.values:
@@ -185,7 +183,7 @@ if __name__ == '__main__':
                 print("   all sequences appear to have a CDR3.")
 
         no_cdr3 = df[~has_cdr3]
-        no_cdr3_fasta_records = ">" + no_cdr3.sequence_id \
+        no_cdr3_fasta_records = ">" + no_cdr3.sequence_id.astype(str) \
                                     + "\n" + no_cdr3.sequence + "\n"
 
         for record in no_cdr3_fasta_records.values:
@@ -207,7 +205,7 @@ if __name__ == '__main__':
                 print("   all sequences have unambiguous bases.")
 
         ambiguous_seqs = df[N_in_sequence]
-        ambiguous_seqs_fasta_records = ">" + ambiguous_seqs.sequence_id \
+        ambiguous_seqs_fasta_records = ">" + ambiguous_seqs.sequence_id.astype(str) \
                                     + "\n" + ambiguous_seqs.sequence + "\n"
 
         for record in ambiguous_seqs_fasta_records.values:

@@ -49,7 +49,7 @@ set-resources:
     - annotate_cell_cycle_b_cell:mem_mb=64000
     - annotate_cell_cycle_b_cell:time="2:00:00"
     - cellranger_vdj:mem_mb=120000
-    - igblast:mem_mb=65000
+    - igblast:mem_mb="65000"
     - igblast:time="24:00:00"
     - igblast:threads=20
     - scvi_bcells:gpus=1

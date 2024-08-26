@@ -13,7 +13,7 @@ partition: "owners"
 
 # Software
 #---------------------------
-vdj_scripts: "scripts/vdj"
+vdj_scripts: "scripts"
 grmlin: "/home/users/cvijovic/ig-germline-discovery/grmlin" 
 #
 #references
@@ -36,4 +36,4 @@ ighc_db:
   imgt_introns: db/IGHC/IGHC_introns_inner.bed
   mouse: db/IGHC/mouse_IGHC_IMGT_reformatted.fast
 # Igblast
-IGDBDIR: /oak/stanford/groups/quake/shared/swiftShare/igblast
+IGDBDIR: /oak/stanford/groups/quake/shared/TabulaBursa/igblast
