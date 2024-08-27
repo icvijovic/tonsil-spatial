@@ -4,7 +4,7 @@ rule reads_to_fasta:
     output:
         "{base}/vdj/all_consensus_sequences.fasta",
     conda:
-        "pacbio",#"../envs/pacbio.yaml",
+        "pacbio"#"../envs/pacbio.yaml",
     log:
         "{base}/logs/reads_to_fasta.log",
     resources:
@@ -20,7 +20,7 @@ rule igblast:
     output:
         "{base}/vdj/igblast.tsv",
     conda:
-        "pacbio",#"../envs/pacbio.yaml",
+        "pacbio"#"../envs/pacbio.yaml",
     resources:
         threads=16,
     params:
@@ -54,7 +54,7 @@ rule filter_and_annotate:
     output:
         "{base}/vdj/igblast_filtered_annotated.tsv.gz",
     conda:
-        "pacbio",#"../envs/pacbio.yaml"
+        "pacbio"#"../envs/pacbio.yaml"
     log:
         "{base}/logs/filter_vdj.log",
     resources:
@@ -88,7 +88,7 @@ rule call_germlines:
         IGDBDIR=config["IGDBDIR"],
     resources:
         mem_mb="131000",
-        time="24:00:00",
+        time="12:00:00",
     shell:
         "{params.grmlin}/grmlin "
         "{input} "
@@ -110,9 +110,9 @@ checkpoint prepare_cdr3_groups_for_distance_evaluation:
     log:
         "{base}/logs/cluster_lineages/prepare_for_clustering.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#../envs/pacbio.yaml"
     params:
-        scripts=config["scripts"],
+        scripts=config["vdj_scripts"],
     resources:
         mem_mb="64000",
         time="24:00:00",
@@ -137,9 +137,9 @@ rule fasta_to_hamming_distance_matrix:
     log:
         "{base}/logs/cluster_lineages/matrix_calc/cdr3/{group}.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio" #"../envs/pacbio.yaml"
     params:
-        scripts=config["scripts"],
+        scripts=config["vdj_scripts"],
     resources:
         mem_mb="128000",
         time="24:00:00",
@@ -158,7 +158,7 @@ rule fasta_to_levenshtein_distance_matrix:
     log:
         "{base}/logs/cluster_lineages/matrix_calc/templated/{group}_{seq_element}.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#../envs/pacbio.yaml"
     params:
         scripts=config["scripts"],
     resources:
@@ -221,7 +221,7 @@ checkpoint cluster_cdr3s:
     log:
         "{base}/logs/cluster_cdr3s/cluster_cdr3s.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#"../envs/pacbio.yaml"
     params:
         scripts=config["scripts"],
     resources:
@@ -252,7 +252,7 @@ rule cluster_templated_regions:
     log:
         "{base}/logs/cluster_templated/tonsil_vdjs_cluster_templated.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#"../envs/pacbio.yaml"
     params:
         scripts=config["scripts"],
     resources:
@@ -276,7 +276,7 @@ rule create_germline_db:
     log:
         "{base}/logs/makedb/tonsil_vdjs_create_germ_db.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio" #"../envs/pacbio.yaml"
     params:
         scripts=config["scripts"],
     shell:
@@ -301,7 +301,7 @@ rule blast_to_germline:
         mem_mb="65000",
         time="12:00:00",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#"../envs/pacbio.yaml"
     shell:
         "python {params.scripts}/blast_to_germline.py "
         "{input.seqs} "
@@ -324,7 +324,7 @@ rule polish_germlines:
     log:
         "{base}/logs/polish_germlines/tonsil_vdjs_polish_germlines.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#"../envs/pacbio.yaml"
     shell:
         "python {params.scripts}/polish_germline_db.py "
         "{input.seqs} "
@@ -342,19 +342,19 @@ rule realign_to_polished_germline:
     output:
         "{base}/germline_db_vcall/final/tonsil_vdjs.tsv.gz",
     params:
-        scripts=config["vdj_scripts"],
+        scripts=config["scripts"],
     resources:
         mem_mb="65000",
         time="12:00:00",
     log:
         "{base}/logs/blast_to_germline/tonsil_vdjs_blast_to_germline_polished.log",
     conda:
-        "../envs/pacbio.yaml"
+        "pacbio"#"../envs/pacbio.yaml"
     shell:
         "python {params.scripts}/blast_to_germline.py "
         "{input.seqs} "
         "-germline_db {input.db} "
         "-outdir {wildcards.base}/germline_db_vcall/final "
-        "-samplename {wildcards.donor} "
+        "-samplename tonsil_vdjs "
         "2> {log}"
 

@@ -14,6 +14,7 @@ partition: "owners"
 # Software
 #---------------------------
 vdj_scripts: "scripts"
+scripts: "scripts"
 grmlin: "/home/users/cvijovic/grmlin/grmlin" 
 #
 #references
