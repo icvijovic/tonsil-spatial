@@ -9,6 +9,7 @@ Figure_Code_SI.ipynb: Code to analyze processed data and produce figures in supp
 data_analysis_utils.py: File containing helper functions used by the figure code generation files.
 
 ZENODO:
+
 Preprocessed_Data/: Contains some intermediate data with longer analysis times, mostly for spatial distance and lineage threshold analysis.
 Lineage_Seqs/: Lineage sequences and trees used in phylogenetic analysis.
 Clustering_Analysis/: Additional lineage clustering data used in lineage threshold analysis.
